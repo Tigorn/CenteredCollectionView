@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CollectionCell: UICollectionViewCell, UITableViewDataSource, UITableViewDelegate {
 	
@@ -30,29 +31,24 @@ class CollectionCell: UICollectionViewCell, UITableViewDataSource, UITableViewDe
         tableView.delegate = self
         tableView.dataSource = self
 
-		// prepare subviews for layout
-		contentView.addSubview(mainView)
-		mainView.translatesAutoresizingMaskIntoConstraints = false
-//		mainView.addSubview(titleLabel)
-        mainView.addSubview(tableView)
-//		titleLabel.translatesAutoresizingMaskIntoConstraints = false
-		mainView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
-		
-		NSLayoutConstraint.activate([
-			mainView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-			mainView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 60),
-			mainView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-			mainView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
-			//tableView.leadingAnchor.constraint(equalTo: mainView.layoutMarginsGuide.leadingAnchor),
-			tableView.topAnchor.constraint(equalTo: mainView.layoutMarginsGuide.topAnchor),
-			//tableView.trailingAnchor.constraint(equalTo: mainView.layoutMarginsGuide.trailingAnchor)
-            tableView.bottomAnchor.constraint(equalTo: mainView.layoutMarginsGuide.bottomAnchor)
-			
-//			titleLabel.leadingAnchor.constraint(equalTo: mainView.layoutMarginsGuide.leadingAnchor),
-//			titleLabel.bottomAnchor.constraint(equalTo: mainView.layoutMarginsGuide.bottomAnchor)
-			])
+        // prepare subviews for layout
+        contentView.addSubview(mainView)
+        mainView.addSubview(tableView)
+        mainView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+        setupConstraints()
 	}
+
+    func setupConstraints() {
+        mainView.snp.makeConstraints { (make) in
+            make.edges.equalTo(contentView.snp.edges)
+        }
+
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
