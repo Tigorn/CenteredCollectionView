@@ -30,8 +30,9 @@ class CollectionCell: UICollectionViewCell, UITableViewDataSource, UITableViewDe
 
         tableView.delegate = self
         tableView.dataSource = self
-
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.estimatedRowHeight = 300
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.register(AnalyticsCell.self, forCellReuseIdentifier: "cell")
 
         // prepare subviews for layout
         contentView.addSubview(mainView)
@@ -59,8 +60,9 @@ class CollectionCell: UICollectionViewCell, UITableViewDataSource, UITableViewDe
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "Implementing a TableView and CollectionView in Swift 3 - YouTube"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! AnalyticsCell
+        cell.titleLabel.text = "Implementing a TableView and CollectionView in Swift 3 - YouTube"
+        cell.detailLabel.text = "Topping halvah sesame snaps. Donut apple pie marshmallow soufflé. Tootsie roll gummies marzipan dragée donut. Donut ice cream jelly beans marzipan gummies liquorice dessert. Brownie sugar plum jelly. Dessert liquorice pudding lemon drops topping jujubes sugar plum apple pie sweet roll. Carrot cake cookie candy tootsie roll ice cream dragée."
         return cell
     }
 }
