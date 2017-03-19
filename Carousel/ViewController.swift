@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 	
 	let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 	var flowLayout: CarouselCollectionViewFlowLayout!
-	let cellPercentWidth: CGFloat = 0.7
+	let cellPercentWidth: CGFloat = 0.85
 	var currentCenteredPage = 0
 	
 	fileprivate var pageWidth: CGFloat {
@@ -34,13 +34,13 @@ class ViewController: UIViewController {
 		
 		// layout subview
 		view.addSubview(collectionView)
-		collectionView.frame = CGRect(x: 0, y: 100, width: view.bounds.width, height: 400)
+		collectionView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
 		
 		// register collection cells
 		collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: String(describing: CollectionCell.self))
 		
 		// configure layout
-		flowLayout = CarouselCollectionViewFlowLayout.configureLayout(collectionView: collectionView, itemSize: CGSize(width: collectionView.bounds.width * cellPercentWidth, height: collectionView.bounds.height), minimumLineSpacing: 20)
+		flowLayout = CarouselCollectionViewFlowLayout.configureLayout(collectionView: collectionView, itemSize: CGSize(width: collectionView.bounds.width * cellPercentWidth, height: collectionView.bounds.height ), minimumLineSpacing: 20)
 		collectionView.showsVerticalScrollIndicator = false
 		collectionView.showsHorizontalScrollIndicator = false
 	}
@@ -53,6 +53,8 @@ class ViewController: UIViewController {
 		currentCenteredPage = page
 		collectionView.isUserInteractionEnabled = false
 	}
+
+    let temp = ["", "", ""]
 }
 
 extension ViewController: UICollectionViewDelegate {
@@ -73,7 +75,7 @@ extension ViewController: UICollectionViewDataSource {
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: CollectionCell.self), for: indexPath) as! CollectionCell
-		cell.titleLabel.text = "Cell #\(indexPath.row)"
+        //cell.titleLabel.text = "Cell #\(indexPath.row)"
 		return cell
 	}
 	
