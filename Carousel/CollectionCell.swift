@@ -37,7 +37,7 @@ class CollectionCell: UICollectionViewCell, UITableViewDataSource, UITableViewDe
         // prepare subviews for layout
         contentView.addSubview(mainView)
         mainView.addSubview(tableView)
-        mainView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+        mainView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         setupConstraints()
 	}
 

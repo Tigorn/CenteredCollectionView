@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 	
@@ -34,15 +35,20 @@ class ViewController: UIViewController {
 		
 		// layout subview
 		view.addSubview(collectionView)
-		collectionView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-		
+        //collectionView.frame = CGRect(x: 0, y: 64, width: view.bounds.width, height: view.bounds.height - 64)
+		collectionView.frame = CGRect(origin: .zero, size: CGSize(width: view.bounds.width, height: view.bounds.height - 15))
 		// register collection cells
 		collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: String(describing: CollectionCell.self))
 		
 		// configure layout
-		flowLayout = CarouselCollectionViewFlowLayout.configureLayout(collectionView: collectionView, itemSize: CGSize(width: collectionView.bounds.width * cellPercentWidth, height: collectionView.bounds.height ), minimumLineSpacing: 20)
+		flowLayout = CarouselCollectionViewFlowLayout.configureLayout(collectionView: collectionView, itemSize: CGSize(width: collectionView.bounds.width * cellPercentWidth, height: collectionView.bounds.height - 50), minimumLineSpacing: 10)
 		collectionView.showsVerticalScrollIndicator = false
 		collectionView.showsHorizontalScrollIndicator = false
+
+        collectionView.snp.makeConstraints { (make) in
+            make.top.equalTo(topLayoutGuide.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
 	}
 	
 	// MARK: - Helper actions
